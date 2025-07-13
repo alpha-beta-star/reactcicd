@@ -1,0 +1,32 @@
+name: "Build-Test"
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  build:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "node-js setup"
+        uses: actions/setup-node@v4
+        with:
+         node-version: '21'
+  copy:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "clone repo"
+        uses: actions/checkout@v2
+
+  dependencies:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "install"
+        run: npm install
+  transpilation:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "transform"
+        run: npm run build
